@@ -1,0 +1,7 @@
+{
+  "name": "psbApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
