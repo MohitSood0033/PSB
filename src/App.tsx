@@ -1,53 +1,64 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
-
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
-
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
-
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
-/* import '@ionic/react/css/palettes/dark.always.css'; */
-/* import '@ionic/react/css/palettes/dark.class.css'; */
-import '@ionic/react/css/palettes/dark.system.css';
-
-/* Theme variables */
-import './theme/variables.css';
+import Login from './pages/Login';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from 'react';
+import { Storage } from '@ionic/storage';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import DevelopmentPage from './pages/PageUnderDevelopment';
+import { API_URL, SECRET_KEY } from './config/config';
+import CryptoJS from 'crypto-js';
+import * as Constant from './constant/Constant';
+import PageUnderDevelopment from './pages/PageUnderDevelopment';
+import ScoreCard from './pages/ScoreCard';
+import PerformanceDashboard from './pages/PerformanceDashbaord';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+
+  const [userDetail, setUserDetail] = useState<any>(null);
+  const key = CryptoJS.enc.Utf8.parse(Constant.CRYPTOKEY);
+  const iv = CryptoJS.enc.Utf8.parse(Constant.CRYPTOIV);
+
+  // const history = useHistory();
+  const storage = new Storage();
+  storage.create();
+  useEffect(() => {
+    const setStatusBar = async () => {
+      const userDetail1 = await storage.get(Constant.USER_DETAILS);
+      setUserDetail(userDetail1);
+      await StatusBar.setBackgroundColor({ color: '#007c3d' });
+      await StatusBar.setStyle({ style: Style.Light });
+    };
+
+    setStatusBar();
+  }, []);
+
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonRouterOutlet>
+
+          <Route exact path="/home">
+            <Home />
+          </Route>
+
+          <Route exact path="/scorecard">
+            <ScoreCard />
+          </Route>
+
+          <Route exact path="/">
+            <PerformanceDashboard />
+          </Route>
+
+        </IonRouterOutlet>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;

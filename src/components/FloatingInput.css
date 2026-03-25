@@ -1,0 +1,49 @@
+/* FloatingInput.css */
+ion-input.psb-input {
+  background: #fff;
+  color: #000;
+  margin: 0px 0px;
+}
+div.input-group{
+  margin:6% 0px;
+}
+div.input-group ion-text.input-error {
+  font-size: xx-small;
+  color: #a20a3a;
+  padding-left: 5px;
+  font-weight: 600;
+}
+ion-input.psb-input label {
+  color: #000;
+  font-size: medium;
+  font-weight: 600;
+  font-family: serif;
+}
+div.input-group.error ion-input.psb-input{
+  --border-color: #a20a3a;
+}
+div.input-group.error ion-input.psb-input label{
+  color: #a20a3a;
+}
+ion-icon.captcha-refresh {
+  color: #009688;
+  font-size: xx-large;
+}
+ion-modal.date-range-modal{
+  --width: 300px;
+  --height: 340px;
+  --background:transparent;
+}
+.date-range-modal ion-datetime {
+  --background: #fff1f2;
+  --background-rgb: 255, 241, 242;
+
+  border-radius: 16px;
+  box-shadow: rgba(var(--ion-color-rose-rgb), 0.3) 0px 10px 15px -3px;
+
+}
+ion-item.psb-file-input-wrapper input[type="file"]{
+  position: absolute;
+  top: 47%;
+  left: 5%;
+}

@@ -1,0 +1,93 @@
+ion-item.sidebar-content{
+    --background: transparent;
+    --border-color: transparent;
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+}
+ion-item.sidebar-content ion-accordion-group{
+    width: 100%;
+    --background: transparent;
+    --border-color: transparent;
+}
+ion-item.sidebar-content ion-accordion-group ion-accordion{
+    width: 100%;
+    --background: transparent;
+    --border-color: transparent;
+}
+ion-item.sidebar-content ion-accordion-group ion-accordion .accordion-content {
+    background: #437f79;
+    padding-left: 4%;
+}
+ion-item.sidebar-content ion-list{
+    background:#437f79;
+    width:95%;
+    margin-left: 5%;
+}
+ion-item.sidebar-content ion-item.sidebar-item{
+    --background:#437f79; /* 009688 */
+    --color: #fff;
+    font-size: small;    
+    --min-height:40px;
+}
+ion-item.sidebar-content ion-item.sidebar-item ion-icon{
+    margin-right: 10px;
+    color:#fff;
+}
+ion-item.sidebar-content ion-item.sidebar-item.active{
+     --color: #ffc107;
+}
+ion-item.sidebar-content ion-item.sidebar-item.active ion-icon{
+    color:#ffc107;
+}
+ion-item.sidebar-content ion-item.sidebar-item ion-label {
+    display: inline-block;
+    color: #fff;
+}
+ion-item.sidebar-content ion-item.sidebar-item.active ion-label {
+    color:#ffc107;
+}
+.logout-link{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 767px) {
+    ion-menu ion-content{
+        --padding-top:15px;
+        --padding-bottom:15px;
+    }
+    
+    ion-menu ion-content ion-item.sidebar-content ion-item.sidebar-item {
+        --background: transparent;
+        --color: #7e7272;
+        font-size: small;
+        --min-height:45px;
+    }
+    ion-menu ion-content ion-item.sidebar-content ion-item.sidebar-item ion-icon {
+        margin-right: 10px;
+        color: #7e7272;
+    }
+    ion-menu ion-content ion-item.sidebar-content ion-item.sidebar-item ion-label {
+        color: #7e7272;
+        display: inline-block;
+    }
+
+    ion-menu ion-content ion-item.sidebar-content ion-item.sidebar-item.active {
+        --color: #007c3d;
+    }
+    ion-menu ion-content ion-item.sidebar-content ion-item.sidebar-item.active ion-icon {
+        color: #007c3d;
+    }
+    ion-menu ion-content ion-item.sidebar-content ion-item.sidebar-item.active ion-label {
+        color: #007c3d;
+    }
+    ion-item.sidebar-content ion-accordion-group ion-accordion .accordion-content {
+        background: transparent;
+        padding-left: 4%;
+    }
+}
+@media only screen and (min-width: 1520px) {
+    .sidebar{
+        top:8%!important;
+    }
+    
+}

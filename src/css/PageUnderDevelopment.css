@@ -1,0 +1,11 @@
+ion-card.psb-page-card ion-list {
+    --ion-background-color: transparent;
+}
+ion-card.psb-page-card ion-list ion-item{
+    --background: #fff;
+    border-radius: 5px;
+    border: 1px solid #b3b3b3;
+}
+ion-card.psb-page-card ion-textarea{
+    background: #fff;
+}

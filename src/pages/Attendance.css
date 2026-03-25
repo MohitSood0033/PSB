@@ -1,0 +1,13 @@
+.psb-attendance .psb-calendar{
+    margin-inline-end:0px;
+    margin-inline-start: 0px;
+    height: 480px;
+}
+.psb-attendance .psb-calendar .legends-section {
+    height: 80px;
+    bottom: -18%;
+}
+.psb-attendance .psb-calendar ul.calender-days li.item, .psb-attendance .psb-calendar ul.calender-dates li.item {
+    margin: 2% 1%;
+    padding: 2% 0px;
+}

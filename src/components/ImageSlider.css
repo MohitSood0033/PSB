@@ -1,0 +1,36 @@
+ion-item.image-slider-wrapper{
+    --background:transparent;
+    position: relative;
+}
+ion-item.image-slider-wrapper ion-img.login-img{
+    max-width:90%;
+    margin-top: 5%;
+    width: 75%;
+}
+
+ion-item.image-slider-wrapper ion-item.image-slider{
+    position: absolute;
+    top: 34%;
+    left: 13.7%;
+    width: 12.25%;
+    height: 225px;
+    --background: #007c3d
+}
+ion-text.portal-title{
+    width: 43%;
+    text-align: center;
+    position: absolute;
+    top: 5%;
+    font-size: xxx-large;
+    font-weight: 600;
+    color: #a20a3a;
+    text-shadow: 2px 2px 3px black;
+}
+ion-text.portal-title strong{
+    color: #007c3d;
+}
+@media only screen and (max-width: 767px) {
+    .image-slider-wrapper{
+        display: none;
+    }
+}

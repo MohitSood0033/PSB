@@ -1,0 +1,111 @@
+.login-page {
+    --background: url('assets/kutumb_bg.png');
+    /* --background: url('assets/kutumbb.jpg'); */
+}
+ion-toolbar{
+    text-align: center;
+    --background: #007c3d;
+    position: relative;
+}
+.psb-login-page ion-toolbar:after {
+    position: absolute;
+    content: '';
+    background: #fff200;
+    height: 17%;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+ion-toolbar ion-img{
+    width: 30%;
+    margin: auto;
+}
+ion-fab{
+    right: 0px;
+    top:12%;
+    position: fixed;
+    z-index: 9999;
+}
+ion-fab-button::part(native) {
+    background-color: #009688;
+    border-radius: 15px 0px 0px 15px;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    color: #ffc107;
+    font-size: 1.95rem;
+    width: 60px;
+    height: 60px;
+}
+  
+ion-fab-button::part(native):hover::after {
+    background-color: #009688;
+}
+  
+ion-fab-button::part(native):active::after {
+    background-color: #009688;
+}
+.animated {
+    animation-name: scaleAnim;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+}
+.panel {
+    position: fixed;
+    top: 12%;
+    right: -30.5%;
+    width: 30%;
+    height: 100%;
+    background-color: #f6edf0;
+    transition: right 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+ion-content.ios .panel{
+    top: 11.5%;
+}
+.panel.open {
+    right: -0.5%;
+}
+@keyframes scaleAnim {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media only screen and (max-width: 767px){
+    ion-toolbar ion-img {
+        width: 100%;
+        margin: auto;
+    }
+    ion-fab{
+        right: -16px;
+        top:13%;
+        position: fixed;
+        z-index: 9999;
+    }
+    ion-fab.ios {
+        top: 11.5%;
+    }        
+    ion-fab-button::part(native) {
+        background-color: #009688;
+        border-radius: 10px 0px 0px 10px;
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        color: #ffc107;
+        font-size: 1.25rem;
+        width: 40px;
+        height: 40px;
+    }
+    .login-from-section ion-input.psb-input {
+        margin: 6% 0px;
+    }
+    .panel {
+        right: -100.5%;
+        width: 100%;
+        
+    }
+}

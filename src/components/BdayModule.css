@@ -1,0 +1,153 @@
+html {
+    --scrollbarBG: #f187a8;
+    --thumbBG: #a20a3a;
+}
+ion-card.bday-section {
+    z-index: 99999;
+    width: 100%;
+    position: relative;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.5);
+    border-radius: 0px;
+    left: -3%;
+    top: -1.2%;
+}
+.bday-section ion-card-header {
+    background: #a20a3a;
+    color: #fff;
+    padding: 2px 10px;
+    position: relative;
+    --color:#fff;
+}
+.bday-section ion-card-header ion-buttons {
+    position: absolute;
+    left: 3px;
+    top: 6px;
+    cursor: pointer;
+    --color:#fff;
+}
+.bday-section ion-card-header ion-buttons ion-button{
+    --color:#fff;
+}
+.bday-section ion-card-header ion-card-title{
+    color: #fff;
+    font-size: x-large;
+    padding: 7px 0px;
+    text-shadow: 0px 1px 1px black;
+}
+.bday-section ion-card-content{
+    background-color: #f6edf0;
+    padding: 2px 5px;
+    position: relative;
+}
+.bday-section ion-item-group.item-group {
+    position: relative;
+}
+.bday-section ion-item-group.item-group:before, .bday-section ion-item-group.item-group:after {
+    content: '';
+    width: 16%;
+    height: 30px;
+    background: #f6edf0;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    border-bottom: 2px solid #a20a3a;
+}
+.bday-section ion-item-group.item-group:before {
+    left: -2px;
+}
+.bday-section ion-item-group.item-group:after {
+    right: -2px;
+}
+.bday-section ion-item-divider{
+    background-color: #f6edf0;
+    color: #a20a3a;
+    font-size: large;
+    text-align: center;  
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+    border-bottom: 0px;
+}
+.bday-section ion-item-divider ion-label svg{
+    margin: 0px 20px;
+}
+.bday-section ion-list {
+    background: transparent;
+    height: 70vh;
+    overflow-y: auto;
+}  
+.bday-section ion-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.bday-section ion-list::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+}
+.bday-section ion-list::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
+}
+.bday-section .bday-content {
+    --ion-background-color: rgba(158, 158, 158, 0.2);
+}
+.bday-section .bday-content:nth-child(2n) {
+    --ion-background-color: rgba(162,10,38, 0.2);
+}
+.bday-section .emp-info-section ion-text {
+    width: 100%;
+    color: #26607c;
+    font-weight: 600;
+    --inner-padding-end: 4px;
+}
+.bday-section .bday-content:nth-child(2n) .emp-info-section ion-text {
+    color: #a20a3a;
+}
+.bday-section .emp-info-section ion-text.name{
+    font-size: small;
+    width: 60%;
+}
+.bday-section .emp-info-section ion-text.pf_code {
+    width: 40%;
+}
+.bday-section .emp-info-section ion-text.pf_code p{
+    font-size: xx-small;
+}
+.bday-section .emp-info-section ion-text.branch{
+    font-size: x-small;
+}
+ion-label.emp-info-section ion-item {
+    --min-height: 30px;
+    --border-color: #f3b50e;
+    --background: transparent;
+}
+
+.bday-section ion-card-header ion-buttons.close-button{
+    left: 85%;
+    top: 25%;
+}
+.psb-calender{
+    position: absolute;
+    top: 10px;
+    left: -16px;
+    --background-color: transparent;
+    --padding: 0px;
+    width: 110%;
+}
+
+@media only screen and (max-width: 767px) {
+    ion-card.bday-section {
+        top: -2.2%;
+    }
+    ion-card.ios.bday-section {
+        top: -2.7%;
+        left: -5%;
+    }
+    .bday-section ion-item-divider.ios{
+        padding: 4px 0px;
+        font-size: small    ;
+    }
+    .bday-section ion-item-group.ios.item-group:before, .bday-section ion-item-group.ios.item-group:after {
+        height: 20px;
+        z-index: 999;
+    }
+}

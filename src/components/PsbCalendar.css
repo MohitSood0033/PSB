@@ -1,0 +1,153 @@
+.psb-calendar{
+    height: 440px;
+    position: relative;
+}
+.background-image {
+    position: absolute;
+    top: 35%;
+    left: 45%;
+    width: 70px;
+    height: 120px;
+    background-image: url(assets/psb_icon.png);
+    background-size: contain;
+    opacity: 0.1;
+    background-repeat: no-repeat;
+    z-index: 999;
+}
+.psb-calendar ion-card-header {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-inline-end: 5px;
+    padding-inline-start: 5px;
+}
+.psb-calendar ion-card-header ion-card-title{
+    font-size: x-large;
+    color: #c4074b;
+}
+.psb-calendar ion-icon{
+    color: #a9a3a3;
+}
+ion-item.body-section, ion-item.header-section{
+    --padding-start: 0px;
+    --padding-end: 0px;
+    --inner-padding-end: 0px;
+}
+ion-item.body-section{
+    height:300px;
+}
+ul.calender-dates, ul.calender-days {
+    margin-bottom: 0px;
+    width: 100%;
+    padding: 0px;
+}
+ul.calender-days li.item, ul.calender-dates li.item {
+    display: inline-block;
+    width: 12%;
+    height: 36px;
+    font-size: small;
+    margin: 1%;
+    padding: 1% 0px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #003049;
+}
+ul.calender-days li.item{
+    font-weight: 600;
+}
+ul.calender-dates li.item.blank{
+    color: transparent;
+}
+ul.calender-dates li.item.p {
+    border: 1px solid #673AB7;
+    color: #673AB7;
+    background: #EDE7F6;
+}
+ul.calender-dates li.item.od {
+    border: 1px solid #219ebc;
+    color: #219ebc;
+    background: #e7f3f6;
+}
+ul.calender-dates li.item.po {
+    border: 1px solid #455A64;
+    color: #455A64;
+    background: #ECEFF1;
+}
+ul.calender-dates li.item.ucl, ul.calender-dates li.item.cl, ul.calender-dates li.item.sl , ul.calender-dates li.item.pl {
+    border: 1px solid #ffc107;
+    color: #ffc107;
+    background: #fffcf4;
+}
+ul.calender-dates li.item.h, ul.calender-dates li.item.wo {
+    border: 1px solid #689F38;
+    color: #689F38;
+    background: #DCEDC8;
+}
+ul.calender-dates li.item.current {
+    background: #b6dbd0;
+    border: 1px solid #1a936f;
+    color: #1a936f;
+}
+.psb-calendar .legends-section {
+    width: 100%;
+    height: 35px;
+    position: absolute;
+    bottom: -5%;
+    left: 0%;
+}
+.psb-calendar .legends-section ul.legends {
+    width: 100%;
+    list-style-type: none;
+    margin: 0px;
+    padding: 6px;
+}
+.psb-calendar .legends-section ul.legends li.item{
+    font-size: xx-small;
+    display: inline-block;
+    margin: 2px 15px;
+    position: relative;
+}
+.psb-calendar .legends-section ul.legends li.item::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    left: -15px;
+    top: 2px;
+    position: absolute;
+}
+.psb-calendar .legends-section ul.legends li.item.current::before{
+    background: #b6dbd0;
+    border: 1px solid #1a936f;
+    color: #1a936f;
+}
+.psb-calendar .legends-section ul.legends li.item.leave::before{
+    border: 1px solid #ffc107;
+    color: #ffc107;
+    background: #fffcf4;
+}
+.psb-calendar .legends-section ul.legends li.item.h::before{
+    border: 1px solid #689F38;
+    color: #689F38;
+    background: #DCEDC8;
+}
+.psb-calendar .legends-section ul.legends li.item.od::before{
+    border: 1px solid #219ebc;
+    color: #219ebc;
+    background: #e7f3f6;
+}
+.psb-calendar .legends-section ul.legends li.item.po::before{
+    border: 1px solid #455A64;
+    color: #455A64;
+    background: #ECEFF1;
+}
+.psb-calendar .legends-section ul.legends li.item.p::before{
+    border: 1px solid #673AB7;
+    color: #673AB7;
+    background: #EDE7F6;
+}
+.psb-calendar .legends-section ul.legends li.item.a::before{
+    border: 1px solid #f00f00;
+    color: #fff;
+    background: #f00f00;
+}

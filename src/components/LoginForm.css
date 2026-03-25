@@ -1,0 +1,109 @@
+.login-from-section ion-card-header{
+    padding: 0px;
+    position: relative;
+    height: 60px;
+}
+
+.login-form-wrapper{
+    --background:transparent;
+}
+.login-from-section ion-card-header ion-img{
+    width: 20%;
+    position: absolute;
+    left: 3%;
+    top: 1%;
+    z-index: 999;
+}
+.login-from-section ion-card-header .login-form-title{
+    font-size: xx-large;
+    text-shadow: 2px 2px rgba(0,0,0,0.5);
+    padding: 1% 5%;
+    position: absolute;
+    height: 85%;
+    background: #009688;
+    width: 100%;
+    top: 8%;
+    box-shadow: 1px 2px 3px 2px rgba(0,0,0,0.5);
+    letter-spacing: 2px;
+}
+.login-from-section ion-card-header.ios .login-form-title{
+    top:25%;
+}
+.login-from-section ion-card-content{
+    padding: 4% 10%;
+}
+form.login-form {
+    position: absolute;
+    width: 30%;
+    right: 10%;
+    top: 4%;
+    z-index: 999;
+}
+.login-content{
+    padding: 10px;
+}
+.form-help-text {
+    font-size: x-small;
+    color: #286481;
+    position: relative;
+    text-align: center;
+    margin: 1.75rem 0px;
+    font-weight: 600;
+  
+  }
+.form-help-text:before, .form-help-text:after {
+    content: '';
+    width: 16%;
+    height: 2px;
+    background: #286481;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+.form-help-text:before {
+    left: 0px;
+}
+.form-help-text:after {
+    right: 0px;
+}
+.login-btn-container{
+    margin-top:6%;
+}
+.login-btn-container ion-button {
+    width: 40%;
+    margin-bottom: 5%;
+    min-height: 38px;
+}
+ion-item.capthca-wrapper ion-img{
+    width: 70%;
+}
+ion-item.capthca-wrapper {
+    --background-color: transparent;
+    --padding-start: 0px;
+}
+ion-item.capthca-wrapper ionCol{
+    --background-color: transparent;
+}
+
+@media only screen and (max-width: 767px) {
+    form.login-form {
+        position: relative;
+        width: 100%;
+        z-index: 999;
+        left: 0;
+        bottom: -16%;
+    }
+    .login-from-section ion-card-content {
+        padding: 4% 4%;
+    }
+    .form-help-text:before, .form-help-text:after {
+        width: 10%;
+    }
+    .login-from-section ion-card-header ion-img {
+        width: 20%;
+        position: absolute;
+        left: 3%;
+        top: 13%;
+        z-index: 999;
+    }
+}

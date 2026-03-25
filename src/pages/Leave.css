@@ -1,0 +1,229 @@
+.psb-leave-count{
+    width: 80%;
+    margin: auto;
+}
+.psb-leave-count.pl ion-card-header {
+    background: linear-gradient(to right, #8BC34A, #4CAF50);
+}
+.psb-leave-count.cl ion-card-header {
+    background: linear-gradient(to right, #26C6DA, #00838F);
+}
+.psb-leave-count.ucl ion-card-header {
+    background: linear-gradient(to right, #EF9A9A, #C2185B);
+}
+.psb-leave-count.sl ion-card-header {
+    background: linear-gradient(to right, #FFCA28, #FF8F00);
+}
+.psb-leave-count ion-card-title{
+    font-size: xxx-large;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: -2px 1px 2px black;
+}
+.psb-leave-count ion-card-content{
+    font-size: xx-large;
+    color: #837979;
+    font-weight: 600;
+    padding: 10% 0px;
+}
+.psb-leaves-records{
+    width: 95%;
+    margin: auto;
+}
+.psb-leaves-records ion-card-header ion-card-title{
+    font-size: x-large;
+    font-weight: 600;
+    color: #FF8F00;
+}
+.psb-leaves-records ion-card-content{
+    padding: 0px;
+}
+.psb-leaves-records ion-card-content table{
+    font-size: small;
+}
+.psb-leaves-records ion-card-content ion-icon{
+    cursor: pointer;
+}
+.psb-leaves-records ion-card-content table thead{
+   background: #068e9c;
+}
+.psb-leaves-records ion-card-content table thead th{
+    padding: 1% 1%;
+    color: #fff;
+    border: 1px solid #fff;
+    text-align: center;
+}
+.psb-leaves-records ion-card-content table thead th:first-child{
+    width: 5%;
+}
+.psb-leaves-records ion-card-content table thead th:last-child{
+    width: 5%;
+}
+.psb-leaves-records ion-card-content table tbody td{
+    padding: 1% 1%;
+    color: #000;
+    border: 1px solid #068e9c;
+    text-align: center;
+}
+.psb-leave-details ion-card-header {
+    background: #4CAF50;
+}
+.psb-leave-details ion-icon {
+    color: #000;
+}
+.psb-leave-details table tbody tr{        
+    border-bottom:1px solid #cecece;
+}
+.psb-leave-details table tbody td{
+    color: #2e384d;
+    padding: 4% 1%;
+    border: none;
+}
+.psb-leave-details table tbody td:nth-child(1){
+    width: 30%;
+}
+span.approved{
+    color: #7cb64e;
+}
+span.pending{
+    color: #FF8F00;
+}
+span.rejected{
+    color: #ec5b50;
+}
+
+ion-list.leave-filter{
+    position: absolute;
+    right: 3px;
+    top: 0px;
+}
+ion-list.leave-filter ion-item{
+    border:2px solid #ccc;
+    border-radius: 5px;
+}
+ion-loading.sc-ion-loading-md-h {
+    font-size: medium;
+    --spinner-color: #4CAF50;
+    color: #4CAF50;
+    --backdrop-opacity:0.5;
+}
+span.cr{
+    color: #4CAF50;
+    font-weight: bold;
+}
+span.dr{
+    color: #ec5b50;
+    font-weight: bold;
+}
+@media only screen and (max-width: 767px) {
+    .psb-pages ion-content{
+        --padding-start:6px;
+        --padding-end:6px;
+        --padding-top:6px;
+        --padding-bottom:6px;
+    }
+    .psb-pages ion-toolbar ion-img {
+        width: 50px;
+        margin: 0px 0px 0px;
+    }
+    .psb-pages ion-toolbar ion-title {
+        font-size: x-large;
+    }
+    .psb-pages ion-header.ios ion-toolbar ion-title {
+        left: 5%;
+        top:0px;
+    }
+    .psb-leave-count {
+        width: 100%;
+        margin: auto;
+        box-shadow: none;
+    }
+    .psb-leave-count ion-card-title{
+        font-size: large;
+        text-shadow: none;
+        color: #2e384d;
+    }
+    .psb-leave-count.pl{
+        background: #dbf6f4;
+    }    
+    .psb-leave-count ion-card-content{
+        font-size: large;
+        color: #2e384d;
+    }
+    .psb-leave-count.cl{
+        background: #d0ecff;
+    }
+    .psb-leave-count.ucl{
+        background: #f5dbe5;
+    }
+    .psb-leave-count.sl{
+        background: #fde1dc;
+    }
+    .psb-leave-count.pl ion-card-header {
+        background: transparent;
+    }
+    .psb-leave-count.cl ion-card-header {
+        background: transparent;
+    }
+    .psb-leave-count.ucl ion-card-header {
+        background: transparent;
+    }
+    .psb-leave-count.sl ion-card-header {
+        background: transparent;
+    }
+    .psb-leaves-records {
+        width: 100%;
+        box-shadow: none;
+    }
+    .psb-leaves-records ion-card-header{
+        padding: 2% 0px;
+    }
+    .psb-leaves-records ion-card-header ion-card-title{
+        background: transparent;
+        text-align: start;
+        text-transform: capitalize;
+        color: #2e384d;
+    }
+    .psb-leaves-records ion-card-content table thead{
+        background: #f8f8f9;
+    }
+    .psb-leaves-records ion-card-content table thead th{
+        color: #2e384d;
+        padding: 4% 1%;
+        border: none;
+    }
+    .psb-leaves-records ion-card-content table tbody td{
+        color: #2e384d;
+        padding: 4% 1%;
+        border: none;
+        font-weight: 600;
+    }
+    .psb-leaves-records ion-card-content table tbody tr{        
+        border-bottom:1px solid #cecece;
+    }
+    .psb-leaves-records ion-card-content table tbody tr:nth-child(2n){        
+        background: transparent;
+    }
+    .psb-leaves-records ion-card-content table tbody tr span.approved{
+        color: #7cb64e;
+    }
+    .psb-leaves-records ion-card-content table tbody tr span.pending{
+        color: #FF8F00;
+    }
+    .psb-leaves-records ion-card-content table tbody tr span.rejected{
+        color: #ec5b50;
+    }
+
+}
+
+@media only screen and (min-width: 767px) {
+    .sidebar {
+        top:8%!important;
+        position: fixed;
+        width:15%; 
+    }
+
+    /* .psb-pages ion-card.psb-page-card {
+        margin-left: 15%;
+    }    */
+}

@@ -1,0 +1,21 @@
+.psb-thoughts{
+    --background: #aacfe1;
+    color: #26607c;
+    border-bottom: 2px solid #26607c;
+    font-size: medium;
+    --min-height:35px
+}
+.psb-thoughts ion-text{    
+    width: 100%;
+    white-space: nowrap;
+    position: relative;
+    animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+    0% {
+      left: 100%;
+    }
+    100% {
+      left: -100%;
+    }
+  }

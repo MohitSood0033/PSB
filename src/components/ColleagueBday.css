@@ -1,0 +1,75 @@
+html {
+    --c-scrollbarBG: #cbdce4;
+    --c-thumbBG: #219ebc    ;
+}
+ion-card.colleague-bday-section{
+    height: 440px;
+    background: #e7f3f6;
+}
+.colleague-bday-section ion-card-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-inline-end: 5px;
+    padding-inline-start: 5px;
+    background: #219ebc;
+}
+.colleague-bday-section ion-card-header ion-card-title{
+    font-size: x-large;
+    color: #fff;
+}
+.colleague-bday-section  ion-card-content{
+    background-color: #e7f3f6;
+    padding: 2px 5px;
+    position: relative;
+}
+.colleague-bday-section ion-list {
+    background: transparent;
+    height: 360px;
+    overflow-y: auto;
+    margin-top: 10px;
+}  
+.colleague-bday-section ion-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--c-thumbBG) var(--c-scrollbarBG);
+}
+.colleague-bday-section ion-list::-webkit-scrollbar-track {
+    background: var(--c-scrollbarBG);
+}
+.colleague-bday-section ion-list::-webkit-scrollbar-thumb {
+    background-color: var(--c-thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--c-scrollbarBG);
+}
+.colleague-bday-section .bday-content {
+    --ion-background-color: rgba(32,151,180, 0.2);
+}
+.colleague-bday-section .bday-content:nth-child(2n) {
+    --ion-background-color: rgba(225, 193, 7, 0.2);
+}
+.colleague-bday-section .emp-info-section ion-text {
+    width: 100%;
+    color: #26607c;
+    font-weight: 600;
+    --inner-padding-end: 4px;
+}
+.colleague-bday-section .bday-content:nth-child(2n) .emp-info-section ion-text {
+    color: #a20a3a;
+}
+.colleague-bday-section .emp-info-section ion-text.name{
+    font-size: small;
+    width: 60%;
+}
+.colleague-bday-section .emp-info-section ion-text.pf_code{
+    width: 40%;
+}
+.colleague-bday-section .emp-info-section ion-text.pf_code p{
+    font-size: xx-small;
+}
+.colleague-bday-section .emp-info-section ion-text.branch{
+    font-size: x-small;
+}
+ion-label.emp-info-section ion-item {
+    --min-height: 30px;
+    --border-color: #f3b50e;
+    --background: transparent;
+}

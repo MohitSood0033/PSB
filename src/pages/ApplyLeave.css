@@ -1,0 +1,111 @@
+ion-toggle.psb-toggle{
+    position: absolute;
+    top: 47%;
+    left: 5%;
+}
+ion-label.psb-toggle-label {
+    position: absolute;
+    top: 45%;
+    left: 17%;
+    color: #000;
+    z-index: 999;
+    font-family: fangsong;
+}
+ion-list.psb-form-list{
+    margin: 8% 0px;
+}
+input[type="file"] {
+    position: absolute;
+    top: 42%;
+    left: 4%;
+    z-index: 999;
+    font-family: fangsong;
+    font-size: small;
+}
+.apply-btn-container ion-button{
+    width: 13%;
+    --border-width:1px;
+    --border-color:#007c3d;
+    --border-style:solid;
+    --background: #007c3d;
+    --padding-top: 4px;
+    --padding-bottom: 4px;
+    min-height: 45px;
+    --background-activated:#fff;
+    --background-activated:#fff;
+    --background-focused: #fff;
+    --background-hover: #fff;
+    --color-activated:#007c3d;
+    --color-activated:#007c3d;
+    --color-focused: #007c3d;
+    --color-hover: #007c3d;
+    --border-color-activated:#007c3d;
+    --border-color-activated:#007c3d;
+    --border-color-focused: #007c3d;
+    --border-color-hover: #007c3d;
+}
+ion-card.psb-page-card ion-list {
+    --ion-background-color: transparent;
+}
+ion-card.psb-page-card ion-list ion-item{
+    --background: #fff;
+    border-radius: 5px;
+    border: 1px solid #b3b3b3;
+}
+ion-card.psb-page-card ion-textarea{
+    background: #fff;
+}
+.outer-col ion-col{
+    padding-inline-start:0px;
+    padding-inline-end:0px;
+}
+ion-textarea{
+    color: #000;
+}
+ion-select{
+    font-size: small;
+}
+@media only screen and (max-width: 767px) {
+    .psb-pages ion-content{
+        --padding-start:6px;
+        --padding-end:6px;
+        --padding-top:6px;
+        --padding-bottom:6px;
+    }
+    .psb-pages ion-toolbar ion-img {
+        width: 50px;
+        margin: 0px 0px 0px;
+    }
+    .psb-pages ion-toolbar ion-title {
+        font-size: x-large;
+    }
+    .psb-pages ion-header.ios ion-toolbar ion-title {
+        left: 5%;
+        top:0px;
+    }
+    ion-card.filter-section {
+        width: 100%;
+        margin: auto;
+        --background: #EEEEEE;
+    }
+    
+    .apply-btn-container ion-button{
+        width: 40%;
+    }
+    ion-label.psb-toggle-label {
+        left: 20%;
+    }
+    ion-toggle.ios.psb-toggle {
+        position: absolute;
+        top: 34%;
+        left: 6%;
+    }
+    ion-label.ios.psb-toggle-label {
+        left: 25%;
+        top: 42%;
+    }
+    ion-list.psb-form-list,ion-input.psb-input {
+        margin: 2% 0px;
+    }
+    
+}

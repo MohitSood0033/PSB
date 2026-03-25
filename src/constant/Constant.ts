@@ -1,0 +1,11 @@
+export const HASH_MISMATCH = "Hash Mismatch";
+export const USER_DETAILS_NOT_PRESENT = "Userdetails is not Present";
+export const USER_DETAILS = "user_details";
+export const CRYPTOKEY = '1234567890123456';
+export const CRYPTOIV = '98765432109876';
+export const CONTENT_TYPE = 'Content-Type';
+export const DECLARATION_BASIS = 'On Declaration basis';
+export const HOME_REDIRECT = '/home';
+export const DASH = '-';
+export const DOUBLE_DASH = '--';
+export const SUCCESS = "success";

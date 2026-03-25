@@ -10,6 +10,19 @@ export default defineConfig({
     react(),
     legacy()
   ],
+
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://navjyotiuat.punjabandsind.bank.in',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) =>
+          path.replace(/^\/api/, '/BCG-PSB-MOBILE/api'),
+      },
+    },
+  },
+
   test: {
     globals: true,
     environment: 'jsdom',
