@@ -542,6 +542,10 @@ ion-modal::part(backdrop) {
     gap: 27px;
 }
 
+.table-row .bottom {
+    color: red;
+}
+
 .table-row,
 .table-header {
     min-width: 500px;

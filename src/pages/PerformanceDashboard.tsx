@@ -131,10 +131,10 @@ const PerformanceDashboard: React.FC = () => {
         try {
             setLoading(true);
             const postData = {
-                user_type: 'BH',
+                user_type: 'RH',
                 month: selectedMonth,
                 year: selectedYear,
-                sol_id: "1024",
+                sol_id: "8031",
             };
 
             const response = await axios.post(
@@ -508,7 +508,7 @@ const PerformanceDashboard: React.FC = () => {
                                                 <IonCol>{item.RNK}</IonCol>
                                                 <IonCol>{item.BRNAME}</IonCol>
                                                 <IonCol>{item.COHORT_NAME}</IonCol>
-                                                <IonCol>{item.SCORE}</IonCol>
+                                                <IonCol className={activeTab === 'bottom' ? 'bottom' : ''}>{item.SCORE}</IonCol>
                                             </IonRow>
                                         ))}
                                     </IonGrid>
