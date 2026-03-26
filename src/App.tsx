@@ -51,7 +51,7 @@ const App: React.FC = () => {
             <ScoreCard />
           </Route>
 
-          <Route exact path="/">
+          <Route exact path="/performance-overview">
             <PerformanceDashboard />
           </Route>
 

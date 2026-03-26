@@ -66,7 +66,7 @@ const ScoreCard: React.FC = () => {
 
     const filteredMonths = useMemo(() => {
         const today = new Date();
-        const prevMonth = today.getMonth(); // IMPORTANT (no +1)
+        const prevMonth = today.getMonth();
 
         if (Number(selectedYear) === today.getFullYear()) {
             return months.filter(m => Number(m.value) <= prevMonth);

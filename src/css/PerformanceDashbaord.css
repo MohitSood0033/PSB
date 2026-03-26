@@ -169,16 +169,20 @@
 }
 
 .kra-score-col {
-    padding: 6px;
+    padding: 10px;
     position: relative;
 }
 
 .kra-score-col:nth-child(odd) {
-    border-right: 1px dashed #CBCBCB;
+    border-right: 1px dashed rgba(203, 203, 203, 0.6);
 }
 
 .kra-score-col.has-bottom-border {
-    border-bottom: 1px dashed #CBCBCB;
+    border-bottom: 1px dashed rgba(203, 203, 203, 0.6);
+}
+
+.kra-score-col:nth-child(2n) {
+    border-right: none;
 }
 
 .kra-score-col:not(.has-bottom-border) {
@@ -342,9 +346,9 @@ ion-modal::part(backdrop) {
     overflow: hidden;
 }
 
-.performance-chart-card ion-card-content {
-    padding: 0;
+.performance-card-content {
     margin: 0;
+    padding: 7px 22px;
 }
 
 .chart-header {
@@ -398,6 +402,57 @@ ion-modal::part(backdrop) {
     height: 260px;
     color: #6B7280;
     font-size: 14px;
+}
+
+.chart-skeleton {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 260px;
+    padding: 20px;
+    gap: 10px;
+}
+
+.skeleton-bar {
+    flex: 1;
+    height: 60%;
+    border-radius: 6px;
+    background: linear-gradient(90deg,
+            #e5e7eb 25%,
+            #f3f4f6 37%,
+            #e5e7eb 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+}
+
+.skeleton-bar:nth-child(1) {
+    height: 40%;
+}
+
+.skeleton-bar:nth-child(2) {
+    height: 70%;
+}
+
+.skeleton-bar:nth-child(3) {
+    height: 55%;
+}
+
+.skeleton-bar:nth-child(4) {
+    height: 80%;
+}
+
+.skeleton-bar:nth-child(5) {
+    height: 65%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -400px 0;
+    }
+
+    100% {
+        background-position: 400px 0;
+    }
 }
 
 .chart-subtitle {
@@ -499,6 +554,10 @@ ion-modal::part(backdrop) {
 
     font-weight: 600;
     color: #007C3D;
+}
+
+.table-row:nth-child(even) {
+    background: #fafafa;
 }
 
 .table-body {

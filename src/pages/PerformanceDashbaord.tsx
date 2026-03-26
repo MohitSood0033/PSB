@@ -7,25 +7,16 @@ import {
     IonSelectOption,
     IonRow,
     IonCol,
-    IonButton,
     IonGrid,
     IonModal
 } from '@ionic/react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import Menu from '../components/Menu';
 import Header from '../components/Header';
-import chair from '../assets/svg/chair.svg';
 import greenBg from '../assets/svg/bg.svg';
 import axios from 'axios';
 import '../css/PerformanceDashbaord.css';
-import { ResponsiveContainer, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Line, BarChart, Bar, Legend } from 'recharts';
-
-const insights = [
-    "Total Housing Loan : INR 1.46 crore (0.4%) worth additional Advances were required to feature in the higher band.",
-    "Total MSME Advances : INR 7.23 crore (",
-    "Another insight...",
-    "More insights..."
-]
+import { ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, BarChart, Bar } from 'recharts';
 
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
@@ -33,9 +24,9 @@ const CustomTooltip = ({ active, payload, label }: any) => {
             <div className="custom-tooltip">
                 <p className="tooltip-label">{label}</p>
                 <p className="tooltip-value">
-                    Score: <span className="score-value">{payload[0].value.toFixed(1)}</span>
+                    Score: <span className="score-value">{payload[0]?.value?.toFixed?.(1) || '--'}</span>
                 </p>
-                {payload[0].payload.rawScore && (
+                {payload[0]?.payload?.rawScore !== undefined && (
                     <p className="tooltip-detail">
                         Raw Score: {payload[0].payload.rawScore}
                     </p>
@@ -87,15 +78,17 @@ const PerformanceDashboard: React.FC = () => {
 
     const [topBranches, setTopBranches] = useState<any[]>([]);
     const [bottomBranches, setBottomBranches] = useState<any[]>([]);
-    const listData = activeTab === 'top' ? topBranches : bottomBranches;
-    const [performanceDetails, setPerformanceDetails] = useState<any>(null);
-    const [graphDetails, setGraphDetails] = useState<any[]>([]);
+    const listData = useMemo(() => (activeTab === 'top' ? topBranches : bottomBranches), [activeTab, topBranches, bottomBranches]);
     const [chartData, setChartData] = useState<any[]>([]);
     const [insightDetails, setInsightDetails] = useState<any[]>([]);
-    const [kraScoreData, setKraScoreData] = useState<any[]>([]);
+    const [kraScoreData, setKraScoreData] = useState<any>(null);
+    const score = kraScoreData?.SCORE ? parseFloat(kraScoreData.SCORE) : 0;
+    const maxScore = kraScoreData?.MAX_SCORE ? parseFloat(kraScoreData.MAX_SCORE) : 0;
+    const percentage = maxScore > 0 ? Math.max(0, Math.min((score / maxScore) * 100, 100)) : 0;
     const [kraData, setKraData] = useState<any[]>([]);
     const [showModal, setShowModal] = useState(false);
     const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzQyNDM3NDQsImlzcyI6InBzYi1hcGkiLCJleHAiOjE3NzY0MDM3NDQsInN1YiI6InBzYiBhcGkgQXV0aGVudGljYXRpb24iLCJ1c2VyX2lkIjoiUzI5MjIyIn0.jUkvtJ60UjUABeASnnthxaVvPWhRWSL1sMYUHjtR9CQ";
+    const isMounted = useRef(true);
 
     const getMonthNameFromNumber = (monthNumber: string) => {
         const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -108,11 +101,13 @@ const PerformanceDashboard: React.FC = () => {
 
         return data
             .sort((a, b) => {
-                return parseInt(a.MONTH) - parseInt(b.MONTH);
+                const dateA = new Date(a.YEAR, a.MONTH - 1);
+                const dateB = new Date(b.YEAR, b.MONTH - 1);
+                return dateA.getTime() - dateB.getTime();
             })
             .map(item => ({
                 month: `${getMonthNameFromNumber(item.MONTH)} ${item.YEAR.slice(-2)}`,
-                score: parseFloat(item.SCORE),
+                score: parseFloat(item.SCORE) || 0,
                 fullMonth: item.MONTH,
                 year: item.YEAR,
                 rawScore: item.SCORE
@@ -121,39 +116,14 @@ const PerformanceDashboard: React.FC = () => {
 
     const filteredMonths = useMemo(() => {
         const today = new Date();
-        const currentMonth = today.getMonth();
+        const prevMonth = today.getMonth();
 
         if (Number(selectedYear) === today.getFullYear()) {
-            return months.filter(m => Number(m.value) <= currentMonth);
+            return months.filter(m => Number(m.value) <= prevMonth);
         }
+
         return months;
     }, [selectedYear]);
-
-    const getMonthComparison = (month: string, year: string) => {
-        const monthIndex = Number(month) - 1;
-        const date = new Date(Number(year), monthIndex);
-
-        const currentMonth = date
-            .toLocaleString('default', { month: 'short' })
-            .toUpperCase();
-
-        const currentYear = date.getFullYear().toString().slice(-2);
-
-        const prevDate = new Date(date);
-        prevDate.setMonth(prevDate.getMonth() - 1);
-
-        const prevMonth = prevDate
-            .toLocaleString('default', { month: 'short' })
-            .toUpperCase();
-
-        const prevYear = prevDate.getFullYear().toString().slice(-2);
-
-        return `${prevMonth}’${prevYear} VS ${currentMonth}’${currentYear}`;
-    };
-
-    const comparisonText = useMemo(() => {
-        return getMonthComparison(selectedMonth, selectedYear);
-    }, [selectedMonth, selectedYear]);
 
     const fetchPerformanceData = async () => {
         try {
@@ -183,52 +153,41 @@ const PerformanceDashboard: React.FC = () => {
                 }
             );
 
-            if (response.status === 200) {
+            if (response.status === 200 && isMounted.current) {
                 const data = response.data.data;
                 console.log('data', data);
 
-                const graphData = data.GRAPH_DETAILS
-                setGraphDetails(graphData);
+                const graphData = data?.GRAPH_DETAILS || [];
 
                 const transformedData = transformGraphData(graphData);
                 setChartData(transformedData);
 
-                const insightData = data.INSIGHT_DETAILS
+                const insightData = data?.INSIGHT_DETAILS || [];
                 setInsightDetails(insightData);
 
-                const kraScoreDetails = data.KRA_SCORE_DETAILS
+                const kraScoreDetails = data?.KRA_SCORE_DETAILS || {};
                 setKraScoreData(kraScoreDetails);
 
-                const kraDetails = data.MY_KRAS_DATA
+                const kraDetails = data?.MY_KRAS_DATA || [];
                 setKraData(kraDetails);
 
-                setTopBranches(data.TOP_OFFICES || []);
-                setBottomBranches(data.BOTTOM_OFFICES || []);
+                setTopBranches(data?.TOP_OFFICES || []);
+                setBottomBranches(data?.BOTTOM_OFFICES || []);
             }
         } catch (error: any) {
             console.error("Performance Dashboard Error:", error);
         } finally {
-            setLoading(false);
-        }
-    };
-
-    const formatDate = (dateString: string) => {
-        if (!dateString) return '';
-        try {
-            const date = new Date(dateString);
-            if (isNaN(date.getTime())) return dateString;
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        } catch (error) {
-            return dateString;
+            if (isMounted.current) {
+                setLoading(false)
+            };
         }
     };
 
     useEffect(() => {
+        isMounted.current = true;
+
         const today = new Date();
-        const currentMonth = today.getMonth();
+        const currentMonth = today.getMonth() + 1;
 
         if (
             Number(selectedYear) === today.getFullYear() &&
@@ -239,19 +198,17 @@ const PerformanceDashboard: React.FC = () => {
         }
 
         fetchPerformanceData();
+        return () => {
+            isMounted.current = false;
+        };
     }, [selectedMonth, selectedYear]);
-
-    const getMonthName = (monthValue: string) => {
-        const month = months.find(m => m.value === monthValue);
-        return month ? month.label : '';
-    };
 
     return (
         <>
-            <Menu currentMenu='performance' />
+            <Menu currentMenu='performance-overview' />
             <IonPage className="psb-pages platform-specific-page" id="main-content">
                 <Header />
-                <IonContent fullscreen>
+                <IonContent fullscreen className={loading ? 'loading' : ''}>
                     <div className="psb-page-width performance-dashboard-page">
                         <img src={greenBg} className="bg-icon" alt="bg icon" />
 
@@ -265,7 +222,7 @@ const PerformanceDashboard: React.FC = () => {
                                         </div>
                                         <IonRow className="align-center-row">
                                             <IonCol size="8">
-                                                <IonRow class="ion-justify-content-between">
+                                                <IonRow className="ion-justify-content-between">
                                                     <IonCol size='6'>
                                                         <IonSelect
                                                             className="custom-dropdown"
@@ -303,12 +260,13 @@ const PerformanceDashboard: React.FC = () => {
                                                         </IonSelect>
                                                     </IonCol>
                                                 </IonRow>
+
                                                 <IonRow className="dropdown-row">
                                                     <div className="kra-stats">
                                                         <div className="kra-stat-item">
-                                                            <h2>You are in Top 20% of your Cohort</h2>
-                                                            <p>Cohort : Scale_5_ZM</p>
-                                                            <p>Rank in Cohort: 6</p>
+                                                            <h2>You are in {kraScoreData?.COHORT_STAND || '--'} of your Cohort</h2>
+                                                            <p>Cohort : {kraScoreData?.COHORT_DESCRIPTION || '--'}</p>
+                                                            <p>Rank in Cohort: {kraScoreData?.RANKS || '--'}</p>
                                                         </div>
                                                     </div>
                                                 </IonRow>
@@ -317,11 +275,11 @@ const PerformanceDashboard: React.FC = () => {
                                                 <div className="kra-score-circle">
                                                     <div
                                                         className="progress-circle-large"
-                                                        style={{ '--value': Number(performanceDetails?.percentage || 0) } as React.CSSProperties}
+                                                        style={{ '--value': percentage } as React.CSSProperties}
                                                     >
                                                         <div className="inner-circle-large">
                                                             <span className="score-number">
-                                                                {performanceDetails?.score ?? '--'}/{performanceDetails?.max_score ?? '--'}
+                                                                {maxScore > 0 ? `${score.toFixed(1)}/${maxScore}` : '--'}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -378,6 +336,7 @@ const PerformanceDashboard: React.FC = () => {
                                                         </IonCol>
                                                     );
                                                 })}
+                                                {kraData.length === 0 && <p>No KRA data available</p>}
                                             </IonRow>
                                         </IonGrid>
                                     </div>
@@ -401,6 +360,7 @@ const PerformanceDashboard: React.FC = () => {
                                             See More
                                         </span>
                                     )}
+                                    {insightDetails?.length === 0 && <p>No insights available</p>}
                                 </div>
                             </IonCardContent>
                         </IonCard>
@@ -413,6 +373,7 @@ const PerformanceDashboard: React.FC = () => {
                             className="custom-sheet-modal"
                         >
                             <div className="bottom-sheet">
+                                <div className="sheet-handle" />
                                 <h3 className="sheet-title">Insights</h3>
                                 <div className="sheet-content">
                                     <ul className="insights-list">
@@ -424,12 +385,18 @@ const PerformanceDashboard: React.FC = () => {
                             </div>
                         </IonModal>
                         <IonCard className="performance-chart-card">
-                            <IonCardContent>
+                            <IonCardContent className='performance-card-content'>
                                 <div className="chart-header">
                                     <h3>Zonal Performance History</h3>
                                 </div>
                                 {loading ? (
-                                    <div className="chart-loading">Loading chart data...</div>
+                                    <div className="chart-skeleton">
+                                        <div className="skeleton-bar" />
+                                        <div className="skeleton-bar" />
+                                        <div className="skeleton-bar" />
+                                        <div className="skeleton-bar" />
+                                        <div className="skeleton-bar" />
+                                    </div>
                                 ) : chartData.length > 0 ? (
                                     <ResponsiveContainer width="100%" height={260}>
                                         <BarChart
@@ -494,6 +461,7 @@ const PerformanceDashboard: React.FC = () => {
                                                 background={{ fill: '#EDEBEB' }}
                                                 animationDuration={1000}
                                                 animationEasing="ease-out"
+                                                animationBegin={200}
                                             />
                                         </BarChart>
                                     </ResponsiveContainer>
@@ -539,9 +507,11 @@ const PerformanceDashboard: React.FC = () => {
                                             </IonRow>
                                         ))
                                     ) : (
-                                        <div className="item no-data">
-                                            <p>No {activeTab === 'top' ? 'top' : 'bottom'} data available</p>
-                                        </div>
+                                        <IonRow>
+                                            <IonCol size="12" className="no-data">
+                                                <p>No {activeTab === 'top' ? 'top' : 'bottom'} data available</p>
+                                            </IonCol>
+                                        </IonRow>
                                     )}
                                 </IonGrid>
                             </div>
