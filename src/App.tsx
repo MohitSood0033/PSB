@@ -13,7 +13,7 @@ import CryptoJS from 'crypto-js';
 import * as Constant from './constant/Constant';
 import PageUnderDevelopment from './pages/PageUnderDevelopment';
 import ScoreCard from './pages/ScoreCard';
-import PerformanceDashboard from './pages/PerformanceDashbaord';
+import PerformanceDashboard from './pages/PerformanceDashboard';
 
 setupIonicReact();
 
@@ -51,7 +51,7 @@ const App: React.FC = () => {
             <ScoreCard />
           </Route>
 
-          <Route exact path="/performance-overview">
+          <Route exact path="/">
             <PerformanceDashboard />
           </Route>
 

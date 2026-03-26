@@ -15,10 +15,11 @@ import Menu from '../components/Menu';
 import Header from '../components/Header';
 import greenBg from '../assets/svg/bg.svg';
 import axios from 'axios';
-import '../css/PerformanceDashbaord.css';
+import '../css/PerformanceDashboard.css';
 import { ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, BarChart, Bar } from 'recharts';
+import React from 'react';
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = React.memo(({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
             <div className="custom-tooltip">
@@ -35,7 +36,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         );
     }
     return null;
-};
+});
 
 const months = [
     { label: 'Jan', value: '1' },
@@ -81,6 +82,7 @@ const PerformanceDashboard: React.FC = () => {
     const listData = useMemo(() => (activeTab === 'top' ? topBranches : bottomBranches), [activeTab, topBranches, bottomBranches]);
     const [chartData, setChartData] = useState<any[]>([]);
     const [insightDetails, setInsightDetails] = useState<any[]>([]);
+    const [employeeData, setEmployeeData] = useState<any[]>([]);
     const [kraScoreData, setKraScoreData] = useState<any>(null);
     const score = kraScoreData?.SCORE ? parseFloat(kraScoreData.SCORE) : 0;
     const maxScore = kraScoreData?.MAX_SCORE ? parseFloat(kraScoreData.MAX_SCORE) : 0;
@@ -97,7 +99,7 @@ const PerformanceDashboard: React.FC = () => {
     };
 
     const transformGraphData = (data: any[]) => {
-        if (!data || data.length === 0) return [];
+        if (!data || data?.length === 0) return [];
 
         return data
             .sort((a, b) => {
@@ -129,10 +131,10 @@ const PerformanceDashboard: React.FC = () => {
         try {
             setLoading(true);
             const postData = {
-                user_type: 'RH',
+                user_type: 'BH',
                 month: selectedMonth,
                 year: selectedYear,
-                sol_id: "8031",
+                sol_id: "1024",
             };
 
             const response = await axios.post(
@@ -170,6 +172,9 @@ const PerformanceDashboard: React.FC = () => {
 
                 const kraDetails = data?.MY_KRAS_DATA || [];
                 setKraData(kraDetails);
+
+                const empData = data?.EMP_PERFORMANCE || [];
+                setEmployeeData(empData);
 
                 setTopBranches(data?.TOP_OFFICES || []);
                 setBottomBranches(data?.BOTTOM_OFFICES || []);
@@ -297,7 +302,7 @@ const PerformanceDashboard: React.FC = () => {
                                                             key={index}
                                                             size="6"
                                                             size-lg="4"
-                                                            className={`kra-score-col ${index < kraData.length - (kraData.length % 2 === 0 ? 2 : 1)
+                                                            className={`kra-score-col ${index < kraData?.length - (kraData?.length % 2 === 0 ? 2 : 1)
                                                                 ? 'has-bottom-border' : ''}`}>
                                                             <IonCard className="kra-score-item-card">
                                                                 <IonCardContent className='kra-score-item-card-content'>
@@ -336,7 +341,7 @@ const PerformanceDashboard: React.FC = () => {
                                                         </IonCol>
                                                     );
                                                 })}
-                                                {kraData.length === 0 && <p>No KRA data available</p>}
+                                                {kraData?.length === 0 && <p>No KRA data available</p>}
                                             </IonRow>
                                         </IonGrid>
                                     </div>
@@ -387,7 +392,7 @@ const PerformanceDashboard: React.FC = () => {
                         <IonCard className="performance-chart-card">
                             <IonCardContent className='performance-card-content'>
                                 <div className="chart-header">
-                                    <h3>Zonal Performance History</h3>
+                                    <h3>{employeeData?.length > 0 ? 'Branch Performance History' : 'Zonal Performance History'}</h3>
                                 </div>
                                 {loading ? (
                                     <div className="chart-skeleton">
@@ -473,50 +478,78 @@ const PerformanceDashboard: React.FC = () => {
                             </IonCardContent>
                         </IonCard>
                     </div>
-                    <div className="branch-rankings-main">
-                        <IonCard className='branch-rankings'>
-                            <div className="ranking-tabs">
-                                <button
-                                    className={activeTab === 'top' ? 'active' : ''}
-                                    onClick={() => setActiveTab('top')}
-                                >
-                                    Top Branches
-                                </button>
-                                <button
-                                    className={activeTab === 'bottom' ? 'active' : ''}
-                                    onClick={() => setActiveTab('bottom')}
-                                >
-                                    Bottom Branches
-                                </button>
-                            </div>
-                            <div className="table-wrapper">
-                                <IonGrid>
-                                    <IonRow className="table-header">
-                                        <IonCol>Rank</IonCol>
-                                        <IonCol>Branch Name</IonCol>
-                                        <IonCol>Cohort</IonCol>
-                                        <IonCol>Score</IonCol>
-                                    </IonRow>
-                                    {listData.length > 0 ? (
-                                        listData.map((item, index) => (
+                    {listData?.length > 0 && (
+                        <div className="branch-rankings-main">
+                            <IonCard className='branch-rankings'>
+                                <div className="ranking-tabs">
+                                    <button
+                                        className={activeTab === 'top' ? 'active' : ''}
+                                        onClick={() => setActiveTab('top')}
+                                    >
+                                        Top Branches
+                                    </button>
+                                    <button
+                                        className={activeTab === 'bottom' ? 'active' : ''}
+                                        onClick={() => setActiveTab('bottom')}
+                                    >
+                                        Bottom Branches
+                                    </button>
+                                </div>
+                                <div className="table-wrapper">
+                                    <IonGrid>
+                                        <IonRow className="table-header">
+                                            <IonCol>Rank</IonCol>
+                                            <IonCol>Branch Name</IonCol>
+                                            <IonCol>Cohort</IonCol>
+                                            <IonCol>Score</IonCol>
+                                        </IonRow>
+                                        {listData.map((item, index) => (
                                             <IonRow className="table-row" key={index}>
                                                 <IonCol>{item.RNK}</IonCol>
                                                 <IonCol>{item.BRNAME}</IonCol>
                                                 <IonCol>{item.COHORT_NAME}</IonCol>
                                                 <IonCol>{item.SCORE}</IonCol>
                                             </IonRow>
-                                        ))
-                                    ) : (
-                                        <IonRow>
-                                            <IonCol size="12" className="no-data">
-                                                <p>No {activeTab === 'top' ? 'top' : 'bottom'} data available</p>
-                                            </IonCol>
-                                        </IonRow>
-                                    )}
-                                </IonGrid>
+                                        ))}
+                                    </IonGrid>
+                                </div>
+                            </IonCard>
+                        </div>
+                    )}
+                    {employeeData?.length > 0 && (
+                        <div className="branch-rankings-main">
+                            <div className='emp-header'>
+                                <h1>Employee Performance</h1>
                             </div>
-                        </IonCard>
-                    </div>
+                            <div className='epf-sub-header'>
+                                <p>Employee</p>
+                                <p>Score</p>
+                            </div>
+                            <IonGrid className='employee-main'>
+                                <IonRow className='employee-main-sub'>
+                                    {employeeData.map((item, index) => (
+                                        <IonCol className='employee-sub' size="12" key={index}>
+                                            <IonCard className="employee-card">
+                                                <IonCardContent className="employee-card-content">
+                                                    <div className="employee-left">
+                                                        {/* <img src={emp.image} alt="profile" className="employee-img" /> */}
+                                                        <div className="employee-info">
+                                                            <h3>{item.EMP_NAME}</h3>
+                                                            <p>{item.COHORT_NAME}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="employee-score">
+                                                        {item.SCORE}
+                                                    </div>
+
+                                                </IonCardContent>
+                                            </IonCard>
+                                        </IonCol>
+                                    ))}
+                                </IonRow>
+                            </IonGrid>
+                        </div>
+                    )}
                 </IonContent>
             </IonPage>
         </>
