@@ -16,7 +16,7 @@ import Header from '../components/Header';
 import greenBg from '../assets/svg/bg.svg';
 import axios from 'axios';
 import '../css/PerformanceDashboard.css';
-import { ResponsiveContainer, CartesianGrid, XAxis, YAxis, Tooltip, BarChart, Bar } from 'recharts';
+import { ResponsiveContainer, XAxis, YAxis, Tooltip, BarChart, Bar } from 'recharts';
 import React from 'react';
 
 const CustomTooltip = React.memo(({ active, payload, label }: any) => {
@@ -102,13 +102,14 @@ const PerformanceDashboard: React.FC = () => {
         if (!data || data?.length === 0) return [];
 
         return data
+            .filter(item => item.YEAR && item.MONTH) // Filter out items without YEAR or MONTH
             .sort((a, b) => {
-                const dateA = new Date(a.YEAR, a.MONTH - 1);
-                const dateB = new Date(b.YEAR, b.MONTH - 1);
+                const dateA = new Date(Number(a.YEAR), Number(a.MONTH) - 1);
+                const dateB = new Date(Number(b.YEAR), Number(b.MONTH) - 1);
                 return dateA.getTime() - dateB.getTime();
             })
             .map(item => ({
-                month: `${getMonthNameFromNumber(item.MONTH)} ${item.YEAR.slice(-2)}`,
+                month: `${getMonthNameFromNumber(item.MONTH)} ${item.YEAR?.slice(-2) || ''}`,
                 score: parseFloat(item.SCORE) || 0,
                 fullMonth: item.MONTH,
                 year: item.YEAR,
@@ -131,10 +132,10 @@ const PerformanceDashboard: React.FC = () => {
         try {
             setLoading(true);
             const postData = {
-                user_type: 'RH',
+                user_type: 'BH',
                 month: selectedMonth,
                 year: selectedYear,
-                sol_id: "8031",
+                sol_id: "1042",
             };
 
             const response = await axios.post(
