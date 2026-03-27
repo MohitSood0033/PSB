@@ -269,7 +269,7 @@ const PerformanceDashboard: React.FC = () => {
                                                 <IonRow className="dropdown-row">
                                                     <div className="kra-stats">
                                                         <div className="kra-stat-item">
-                                                            <h2>You are in {kraScoreData?.COHORT_STAND || '--'} of your Cohort</h2>
+                                                            <h2>You are in {kraScoreData?.COHORT_STAND || '--'}%  of your Cohort</h2>
                                                             <p>Cohort : {kraScoreData?.COHORT_DESCRIPTION || '--'}</p>
                                                             <p>Rank in Cohort: {kraScoreData?.RANKS || '--'}</p>
                                                         </div>
@@ -311,26 +311,26 @@ const PerformanceDashboard: React.FC = () => {
                                                                         <span className="score-value">{item.SCORE}/<span className="score-max-value">{item.MAX_SCORE}</span></span>
                                                                     </div>
 
-                                                                    {(item.ACTUAL !== undefined && item.ACTUAL !== null) ||
-                                                                        (item.TARGET !== undefined && item.TARGET !== null) ? (
+                                                                    {(item.ACTUAL !== undefined && item.ACTUAL !== null && Number(item.ACTUAL) !== 0) ||
+                                                                        (item.TARGET !== undefined && item.TARGET !== null && Number(item.TARGET) !== 0) ? (
                                                                         <div className="kra-details">
-                                                                            {item.ACTUAL !== undefined && item.ACTUAL !== null && (
-                                                                                <div className="detail-item">
+                                                                            {item.ACTUAL !== undefined && item.ACTUAL !== null && Number(item.ACTUAL) !== 0 && (
+                                                                                < div className="detail-item">
                                                                                     <span className="label">Actual : </span>
                                                                                     <span className="value">
                                                                                         {typeof item.ACTUAL === 'number'
                                                                                             ? item.ACTUAL.toLocaleString()
-                                                                                            : item.ACTUAL}
+                                                                                            : item.ACTUAL}L
                                                                                     </span>
                                                                                 </div>
                                                                             )}
-                                                                            {item.TARGET !== undefined && item.TARGET !== null && (
+                                                                            {item.TARGET !== undefined && item.TARGET !== null && Number(item.TARGET) !== 0 && (
                                                                                 <div className="detail-item">
                                                                                     <span className="label">Target : </span>
                                                                                     <span className="value">
                                                                                         {typeof item.TARGET === 'number'
                                                                                             ? item.TARGET.toLocaleString()
-                                                                                            : item.TARGET}
+                                                                                            : item.TARGET}L
                                                                                     </span>
                                                                                 </div>
                                                                             )}
@@ -416,11 +416,11 @@ const PerformanceDashboard: React.FC = () => {
                                                     <stop offset="100%" stopColor="#22C55E" />
                                                 </linearGradient>
                                             </defs>
-                                            <CartesianGrid
+                                            {/* <CartesianGrid
                                                 strokeDasharray="3 3"
                                                 stroke="#E5E7EB"
                                                 vertical={false}
-                                            />
+                                            /> */}
                                             <XAxis
                                                 dataKey="month"
                                                 axisLine={false}
@@ -467,6 +467,17 @@ const PerformanceDashboard: React.FC = () => {
                                                 animationDuration={1000}
                                                 animationEasing="ease-out"
                                                 animationBegin={200}
+                                                label={{
+                                                    position: 'top',
+                                                    fill: 'rgb(55, 65, 81)',
+                                                    fontSize: 10,
+                                                    fontWeight: 600,
+                                                    offset: 5,
+                                                    formatter: (label) => {
+                                                        const value = Number(label);
+                                                        return value.toFixed(1);
+                                                    }
+                                                }}
                                             />
                                         </BarChart>
                                     </ResponsiveContainer>
