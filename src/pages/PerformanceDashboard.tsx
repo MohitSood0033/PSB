@@ -321,7 +321,7 @@ const PerformanceDashboard: React.FC = () => {
                                                                                     <span className="value">
                                                                                         {typeof item.ACTUAL === 'number'
                                                                                             ? item.ACTUAL.toLocaleString()
-                                                                                            : item.ACTUAL}L
+                                                                                            : item.ACTUAL} Lakhs
                                                                                     </span>
                                                                                 </div>
                                                                             )}
@@ -331,7 +331,7 @@ const PerformanceDashboard: React.FC = () => {
                                                                                     <span className="value">
                                                                                         {typeof item.TARGET === 'number'
                                                                                             ? item.TARGET.toLocaleString()
-                                                                                            : item.TARGET}L
+                                                                                            : item.TARGET} Lakhs
                                                                                     </span>
                                                                                 </div>
                                                                             )}
