@@ -14,6 +14,7 @@ import * as Constant from './constant/Constant';
 import PageUnderDevelopment from './pages/PageUnderDevelopment';
 import ScoreCard from './pages/ScoreCard';
 import PerformanceDashboard from './pages/PerformanceDashboard';
+import PerformanceDashboardMD from './pages/PerformanceDashboardMD';
 
 setupIonicReact();
 
@@ -51,8 +52,12 @@ const App: React.FC = () => {
             <ScoreCard />
           </Route>
 
-          <Route exact path="/">
+          <Route exact path="/performance-dashboard">
             <PerformanceDashboard />
+          </Route>
+
+          <Route exact path="/">
+            <PerformanceDashboardMD />
           </Route>
 
         </IonRouterOutlet>

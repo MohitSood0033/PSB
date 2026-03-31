@@ -404,84 +404,110 @@ const PerformanceDashboard: React.FC = () => {
                                         <div className="skeleton-bar" />
                                     </div>
                                 ) : chartData.length > 0 ? (
-                                    <ResponsiveContainer width="100%" height={260}>
-                                        <BarChart
-                                            data={chartData}
-                                            margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-                                            barCategoryGap={20}
-                                            barGap={4}
-                                        >
-                                            <defs>
-                                                <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                                                    <stop offset="0%" stopColor="#4ADE80" />
-                                                    <stop offset="100%" stopColor="#22C55E" />
-                                                </linearGradient>
-                                            </defs>
-                                            {/* <CartesianGrid
-                                                strokeDasharray="3 3"
-                                                stroke="#E5E7EB"
-                                                vertical={false}
-                                            /> */}
-                                            <XAxis
-                                                dataKey="month"
-                                                axisLine={false}
-                                                tickLine={false}
-                                                tick={{
-                                                    fill: '#6B7280',
-                                                    fontSize: 10,
-                                                    angle: -30,
-                                                    textAnchor: 'end'
-                                                }}
-                                                dy={10}
-                                                dx={-8}
-                                                height={60}
-                                                interval={0}
-                                            />
-                                            <YAxis
-                                                domain={['auto', 'auto']}
-                                                axisLine={false}
-                                                tickLine={false}
-                                                tick={{ fill: '#6B7280', fontSize: 10 }}
-                                                dx={-5}
-                                                label={{
-                                                    value: 'KRA Score',
-                                                    angle: -90,
-                                                    position: 'insideLeft',
-                                                    style: {
-                                                        fill: '#374151',
-                                                        fontSize: 12,
-                                                        fontWeight: 500,
-                                                        textAnchor: 'middle'
-                                                    }
-                                                }}
-                                            />
-                                            <Tooltip
-                                                content={<CustomTooltip />}
-                                                cursor={{ fill: 'rgba(34, 197, 94, 0.08)' }}
-                                            />
-                                            <Bar
-                                                dataKey="score"
-                                                fill="url(#barGradient)"
-                                                radius={[6, 6, 0, 0]}
-                                                maxBarSize={50}
-                                                background={{ fill: '#EDEBEB' }}
-                                                animationDuration={1000}
-                                                animationEasing="ease-out"
-                                                animationBegin={200}
-                                                label={{
-                                                    position: 'top',
-                                                    fill: 'rgb(55, 65, 81)',
-                                                    fontSize: 10,
-                                                    fontWeight: 600,
-                                                    offset: 5,
-                                                    formatter: (label) => {
-                                                        const value = Number(label);
-                                                        return value.toFixed(1);
-                                                    }
-                                                }}
-                                            />
-                                        </BarChart>
-                                    </ResponsiveContainer>
+                                    <div className="performance-history-chart-wrapper">
+                                        <ResponsiveContainer width="100%" height="100%">
+                                            <BarChart
+                                                data={chartData}
+                                                margin={{ top: 16, right: 12, left: 22, bottom: 52 }}
+                                                barCategoryGap="18%"
+                                                barGap={2}
+                                            >
+                                                <defs>
+                                                    <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="0%" stopColor="#0D9D53" />
+                                                        <stop offset="100%" stopColor="#007C3D" />
+                                                    </linearGradient>
+                                                </defs>
+
+                                                <XAxis
+                                                    dataKey="month"
+                                                    axisLine={false}
+                                                    tickLine={false}
+                                                    tick={{
+                                                        fill: '#6B7280',
+                                                        fontSize: 10,
+                                                        angle: -30,
+                                                        textAnchor: 'end'
+                                                    }}
+                                                    dy={8}
+                                                    dx={-6}
+                                                    height={58}
+                                                    interval={0}
+                                                    label={{
+                                                        value: 'Month',
+                                                        position: 'insideBottom',
+                                                        offset: -8,
+                                                        style: {
+                                                            fill: '#9CA3AF',
+                                                            fontSize: 12,
+                                                            fontWeight: 500
+                                                        }
+                                                    }}
+                                                />
+
+                                                <YAxis
+                                                    domain={['auto', 'auto']}
+                                                    axisLine={false}
+                                                    tickLine={false}
+                                                    tick={{ fill: '#6B7280', fontSize: 10 }}
+                                                    width={38}
+                                                    dx={-2}
+                                                    label={{
+                                                        value: 'KRA Score',
+                                                        angle: -90,
+                                                        position: 'insideLeft',
+                                                        offset: -6,
+                                                        style: {
+                                                            fill: '#9CA3AF',
+                                                            fontSize: 12,
+                                                            fontWeight: 500,
+                                                            textAnchor: 'middle'
+                                                        }
+                                                    }}
+                                                />
+
+                                                <Tooltip
+                                                    content={<CustomTooltip />}
+                                                    cursor={{ fill: 'rgba(34, 197, 94, 0.08)' }}
+                                                />
+
+                                                <Bar
+                                                    dataKey="score"
+                                                    fill="url(#barGradient)"
+                                                    radius={[6, 6, 0, 0]}
+                                                    maxBarSize={36}
+                                                    animationDuration={1000}
+                                                    animationEasing="ease-out"
+                                                    animationBegin={200}
+                                                    background={(props: any) => {
+                                                        const { x, y, width, height } = props;
+                                                        return (
+                                                            <rect
+                                                                x={x}
+                                                                y={y}
+                                                                width={width}
+                                                                height={height}
+                                                                fill="#EDEBEB"
+                                                                rx={6}
+                                                                ry={6}
+                                                            />
+                                                        );
+                                                    }}
+                                                    label={{
+                                                        position: 'top',
+                                                        fill: "#3A3A3A",
+                                                        fontSize: 10,
+                                                        fontWeight: 600,
+                                                        offset: 4,
+                                                        formatter: (label: any) => {
+                                                            const value = Number(label);
+                                                            return value.toFixed(1);
+                                                        }
+                                                    }}
+                                                />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </div>
                                 ) : (
                                     <div className="no-data-message">
                                         <p>No performance data available for the selected period</p>
