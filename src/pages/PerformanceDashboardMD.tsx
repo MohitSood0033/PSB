@@ -97,7 +97,6 @@ const PerformanceDashboardMD: React.FC = () => {
     }, [selectedYear]);
 
     const transformChartData = (apiData: any[], filterType?: string) => {
-        // Safe check for apiData
         if (!apiData || !Array.isArray(apiData) || apiData.length === 0) return [];
 
         let filteredData = apiData;
@@ -167,17 +166,14 @@ const PerformanceDashboardMD: React.FC = () => {
                 const data = response.data.data;
                 console.log('data', data);
 
-                // Safely get ZONE_GRAPH array
                 const zoneGraph = data?.ZONE_GRAPH || [];
 
                 if (selectedTab === 'zone') {
-                    // For Zone: filter by 'RO'
                     const transformedData = transformChartData(zoneGraph, 'RH');
                     setZoneGraphData(transformedData);
                     setTop(data?.BEST_ZONE || []);
                     setBottom(data?.BOTTOM_ZONE || []);
                 } else {
-                    // For Branch Summary: filter by 'BH'
                     const transformedData = transformChartData(zoneGraph, 'BH');
                     setZoneGraphData(transformedData);
                     setTop(data?.BEST_BRANCH || []);
@@ -476,7 +472,7 @@ const PerformanceDashboardMD: React.FC = () => {
                                             )}
                                         </div>
 
-                                        <div className="zone-col-score zone-score-text">
+                                        <div className={`zone-col-score zone-score-text ${activeTab === 'bottom' ? 'zone-score-red-text' : ''}`}>
                                             {item?.SCORE || '--'}
                                         </div>
                                     </div>
@@ -501,7 +497,10 @@ const PerformanceDashboardMD: React.FC = () => {
                 <IonToolbar>
                     <IonSegment
                         value={selectedTab}
-                        onIonChange={(e) => setSelectedTab(e.detail.value as 'zone' | 'summary')}
+                        onIonChange={(e) => {
+                            setSelectedTab(e.detail.value as 'zone' | 'summary');
+                            setActiveTab('top');
+                        }}
                     >
                         <IonSegmentButton value="zone">
                             <IonLabel>Zone</IonLabel>

@@ -132,10 +132,10 @@ const PerformanceDashboard: React.FC = () => {
         try {
             setLoading(true);
             const postData = {
-                user_type: 'RH',
+                user_type: 'BH',
                 month: selectedMonth,
                 year: selectedYear,
-                sol_id: "8031",
+                sol_id: "1042",
             };
 
             const response = await axios.post(

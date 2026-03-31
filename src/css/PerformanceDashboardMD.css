@@ -262,6 +262,10 @@ ion-segment-button {
     line-height: 1.3;
 }
 
+.zone-score-red-text {
+    color: red;
+}
+
 .zone-name-text {
     min-width: 0;
     white-space: nowrap;
