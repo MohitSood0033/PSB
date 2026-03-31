@@ -7,6 +7,17 @@
     z-index: 1;
 }
 
+ion-segment {
+    --background: #f5f5f5;
+}
+
+ion-segment-button {
+    --color: #2A2D2C;
+    --color-checked: #007C3D;
+    font-size: clamp(12px, 2.5vw, 14px);
+    line-height: 18px;
+}
+
 .distribution-chart-card {
     margin: 0;
     padding: 0;
@@ -18,6 +29,49 @@
     padding: clamp(7px, 2.8vw, 16px) clamp(12px, 4vw, 22px);
     margin: 0;
     background: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
+}
+
+.distribution-date-selector-grid {
+    padding: 0;
+    margin-bottom: 22px;
+}
+
+.distribution-align-center-row {
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.distribution-filter-col-main {
+    padding: 0;
+    margin: 0;
+}
+
+.distribution-filter-row {
+    width: 100%;
+}
+
+.distribution-filter-row ion-col {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.distribution-filter-row ion-col:first-child {
+    padding-right: 8px;
+}
+
+.distribution-filter-row ion-col:last-child {
+    padding-left: 8px;
+}
+
+.distribution-custom-dropdown {
+    margin-top: 6px;
+    width: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.distribution-custom-dropdown::part(container) {
+    width: 100%;
 }
 
 .distribution-chart-header {
@@ -233,6 +287,11 @@
         padding: 10px;
     }
 
+    .distribution-align-center-row {
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
     .distribution-chart-wrapper {
         height: 290px;
     }
@@ -285,6 +344,10 @@
 }
 
 @media (max-width: 360px) {
+    .distribution-align-center-row ion-row {
+        flex-direction: column;
+        gap: 6px;
+    }
 
     .zone-table-header-custom,
     .zone-rank-card {
@@ -313,5 +376,13 @@
     .zone-table-header-custom .zone-col-name,
     .zone-table-header-custom .zone-col-score {
         font-size: 11px;
+    }
+}
+
+@media (max-width: 340px) {
+
+    .zone-table-header-custom,
+    .zone-rank-card {
+        grid-template-columns: 52px minmax(0, 1fr) 52px;
     }
 }
